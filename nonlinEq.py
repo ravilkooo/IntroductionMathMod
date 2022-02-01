@@ -1,13 +1,14 @@
 import math
 
-
+# численное дифференцирование
 def deriv(func, eps):
     def f1(x):
         return (func(x + eps) - func(x)) / eps
-
     return f1
 
 
+# метод дихотмии
+# требование: функция принимает значения разных знаков на концах
 def dihotMethod(func, a, b, eps):
     f1 = func(a)
     f2 = func(b)
@@ -23,7 +24,13 @@ def dihotMethod(func, a, b, eps):
     return (a + b) / 2
 
 
+# метод Ньютона
+# требование: функция принимает значения разных знаков на концах
 def NewtonMethod(func, a, b, eps):
+    f1 = func(a)
+    f2 = func(b)
+    if f1 * f2 > 0:
+        return a - 1
     f_1deriv = deriv(func, eps)
     f_2deriv = deriv(f_1deriv, eps)
     x = a
@@ -36,6 +43,8 @@ def NewtonMethod(func, a, b, eps):
     return x
 
 
+# метод секущих
+# требование: функция принимает значения разных знаков на концах
 def secantMethod(func, a, b, eps):
     f1 = func(a)
     f2 = func(b)
